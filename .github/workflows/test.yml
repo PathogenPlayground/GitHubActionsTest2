@@ -1,0 +1,22 @@
+name: Test
+on:
+  workflow_dispatch:
+    inputs:
+      project:
+        description: "The name of the project to be updated (IE: a folder name within the src directory)"
+        required: true
+      version:
+        description: "The target version to update to (IE: a Git tag in the project)"
+        required: true
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test
+        env:
+          PROJECT: ${{github.event.inputs.project}}
+          VERSION: ${{github.event.inputs.version}}
+        run: |
+          echo "Project='$PROJECT'"
+          echo "Version='$VERSION'"
